@@ -19,7 +19,7 @@ Cuba.define do
   on post, "cargar" do
     task = Task.create(
       title: req.POST["title"],
-      status: "todo" 
+      status: "to_do" 
     )
     res.redirect("/tasks/#{task.id}")
   end
@@ -30,7 +30,35 @@ Cuba.define do
       description: req.POST["description"]
     )
     res.redirect("/tasks/#{task.id}")
-    end
+  end
+  
+  on post, "status_change_at_home" do
+    task = Task[req.POST["task_id"]]
+    if task.status == "done"
+      task.update(
+        status: "to_do"
+      )
+      else
+        task.update(
+          status: "done"
+        )
+    end  
+      res.redirect("/")
+  end
+  
+  on post, "status_change_at_task" do
+    task = Task[req.POST["task_id"]]
+    if task.status == "done"
+      task.update(
+        status: "to_do"
+      )
+      else
+        task.update(
+          status: "done"
+        )
+    end  
+      res.redirect("/tasks/#{task.id}")
+  end
   
   on root do
     res.write(view("home", tasks: Task.all))

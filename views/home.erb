@@ -13,16 +13,19 @@
       <div class="panel-body">
         <a href="/tasks/<%= task.id %>"><%= task.title %> </a>
         
-        <% if task.status == "done" %>
-          <button type="button" class="btn btn-default pull-right">
-          <span class="glyphicon glyphicon-ok-circle"></span> Done
-          </button>
-          <% else %>
-            <button type="button" class="btn btn-default pull-right">
-            <span class="glyphicon glyphicon-remove-circle"></span> To Do
-            </button>
-        <% end %>
-          
+        <form method="post" action="/status_change_at_home">
+          <input type="hidden" value="<%= task.id %>" name="task_id">  
+          <div class="form-group">
+          </div>
+
+          <button type="submit" class="btn btn-default pull-right">
+            <% if task.status == "done" %>
+              <span class="glyphicon glyphicon-ok-circle"></span> Done
+              <% else %>
+                <span class="glyphicon glyphicon-remove-circle"></span> To Do
+              <% end %>
+          </button> 
+        </form> 
       </div>
     </div>
   <% end %>
