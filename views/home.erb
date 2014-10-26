@@ -1,0 +1,29 @@
+<div class="container">
+  
+  <form method="post" action="/cargar">
+    <div class="form-group">
+      <input name="title" type="text" class="form-control" placeholder="Tarea">
+    </div>
+    <button type="submit" class="btn btn-success btn-sm">Cargar</button>
+  </form>
+  <br></br>  
+  
+  <% tasks.each do |task| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <a href="/tasks/<%= task.id %>"><%= task.title %> </a>
+        
+        <% if task.status == "done" %>
+          <button type="button" class="btn btn-default pull-right">
+          <span class="glyphicon glyphicon-ok-circle"></span> Done
+          </button>
+          <% else %>
+            <button type="button" class="btn btn-default pull-right">
+            <span class="glyphicon glyphicon-remove-circle"></span> To Do
+            </button>
+        <% end %>
+          
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="page-header">
+    <h1> <%= task.title %> </h1>
+
+    <h2>  
+      <% if task.status == "done" %>
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-ok-circle"></span> Done
+        </button>
+      <% else %>
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-remove-circle"></span> To Do
+        </button>
+      <% end %> 
+    </h2>
+
+  </div>
+
+    <%= task.description %>
+  
+  <% if not task.description %> 
+  
+    <form method="post" action="/describir">
+      <input type="hidden" value="<%= task.id %>" name="task_id">  
+      <div class="form-group">
+        <textarea name="description" class="form-control" placeholder="Descripción de la tarea"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success btn-sm">Agregar Descripción</button>
+    </form>
+  <% end %>
+</div>
